@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm justify-content-between">
+    <a class="navbar-brand" [routerLink]="''"
+    >
+        <img src="./../assets/images/logo.png" alt="Clothes Shop" class="logo" width="50px" />
+    </a>
+    <ul class="navbar-nav">
+        <li class="nav-item" 
+            routerLinkActive="active"
+            *ngFor="let page of pages"
+        >
+            <a class="nav-link" 
+                [routerLink]="page.route"
+            >
+                {{ page.title | uppercase }}
+            </a>
+        </li>
+        <app-cart-quantity></app-cart-quantity>
+    </ul><!-- 
+    <button 
+        [routerLink]="page.route" 
+        *ngFor="let page of pages"
+        routerLinkActive="active"
+    >
+        {{page.title}}
+    </button> -->
+</nav>
+<hr/>

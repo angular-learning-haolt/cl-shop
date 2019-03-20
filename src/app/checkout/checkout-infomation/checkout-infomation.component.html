@@ -1,0 +1,25 @@
+<div class="card">
+	<div class="card-header">
+		<h5>INFORMATION</h5>
+	</div>
+	<div class="card-body">
+		<form [formGroup]="customerInfo" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<label>Name:</label>
+				<input type="text" class="form-control" formControlName="name" required>
+			</div>
+			<div formArrayName="addresses" class="form-group form-group-address">
+				<a href="#" (click)="addAddress(); $event.preventDefault();">
+				<i class="fas fa-plus"></i>
+				</a>
+				<div *ngFor="let address of addresses.controls; let i=index">
+					<label>
+						Address <span *ngIf="addresses.length > 1">{{ i+1 }}</span>:
+					</label>
+					<input type="text" [formControlName]="i" class="form-control">
+				</div>
+			</div>
+			<button type="submit" [disabled]="!customerInfo.valid" class="btn btn-success">Submit</button>
+		</form>
+	</div>
+</div>

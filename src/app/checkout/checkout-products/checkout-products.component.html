@@ -1,0 +1,28 @@
+<table class="table table-striped table-hover table-bordered">
+	<thead>
+		<tr>
+			<th scope="col">No.</th>
+			<th scope="col">Name</th>
+			<th scope="col">Image</th>
+			<th scope="col">Unit Price</th>
+			<th scope="col">Quantity</th>
+			<th scope="col">Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let checkoutProduct of checkoutProducts; let i = index">
+			<td>{{ i + 1 }}</td>
+			<td>{{ checkoutProduct.name }}</td>
+			<td><img src="{{ checkoutProduct.imgUrl }}" alt="product" style="max-width: 100px" /></td>
+			<td>{{ checkoutProduct.price | currency : 'VND' }}</td>
+			<td>
+				{{ checkoutProduct.quantity }}
+			</td>
+			<td>{{ (checkoutProduct.price * checkoutProduct.quantity) | currency : 'VND' }}</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<td colspan="5" (click)="onCountSummary()"><b>SUMMARY</b></td>
+		<td><b>{{ summary | currency : 'VND' }}</b></td>
+	</tfoot>
+</table>

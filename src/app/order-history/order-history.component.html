@@ -1,0 +1,29 @@
+<table class="table table-striped table-hover table-bordered">
+	<thead>
+		<tr>
+			<th scope="col">No.</th>
+			<th scope="col">Name</th>
+			<th scope="col">Address</th>
+			<th scope="col">Products</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let checkoutBill of checkoutBills; let i = index">
+			<td>{{ i + 1 }}</td>
+			<td>{{ checkoutBill.name }}</td>
+			<td>
+				<ul *ngFor="let address of checkoutBill.addresses">
+					<li><span>{{ address }}</span></li>
+				</ul>
+			</td>
+			<td>
+				<ul *ngFor="let product of checkoutBill.products; let i = index">
+					<li>
+						<p><i>Name:{{ product.name }}</i></p>
+						<p><i>Price:{{ product.quantity }} x {{ product.price }} (quantity x unit price)</i></p>
+					</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
