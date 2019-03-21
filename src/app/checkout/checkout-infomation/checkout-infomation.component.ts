@@ -57,7 +57,7 @@ export class CheckoutInfomationComponent implements OnInit {
 		localStorage.setItem('inCartProducts', JSON.stringify([]));
 		// console.log(this.checkoutBills);
 		this.routerService.navigate(['checkout/notice']);
-		localStorage.removeItem('inCartProducts');
+		localStorage.setItem('inCartProducts', JSON.stringify([]));
 		this.cartService.productsUseObservible.next([]);
 	}
 
