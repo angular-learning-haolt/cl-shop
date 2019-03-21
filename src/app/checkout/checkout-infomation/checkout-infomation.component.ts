@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CheckoutService } from './../checkout.service';
+import { CartService } from './../../cart/cart.service';
 import { CheckoutBill } from './../checkout-bill.class';
 
 @Component({
@@ -35,7 +36,8 @@ export class CheckoutInfomationComponent implements OnInit {
 	constructor(
 		private fb: FormBuilder,
 		public routerService : Router,
-		public checkoutService : CheckoutService
+		public checkoutService : CheckoutService,
+		public cartService : CartService
 	) { }
 
 	addAddress() {
@@ -55,6 +57,8 @@ export class CheckoutInfomationComponent implements OnInit {
 		localStorage.setItem('inCartProducts', JSON.stringify([]));
 		// console.log(this.checkoutBills);
 		this.routerService.navigate(['checkout/notice']);
+		localStorage.removeItem('inCartProducts');
+		this.cartService.productsUseObservible.next([]);
 	}
 
 }
