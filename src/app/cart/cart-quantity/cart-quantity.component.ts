@@ -29,10 +29,15 @@ export class CartQuantityComponent implements OnInit, OnDestroy {
 		// 		this.inCartProducts = res;
 		// 	})
 		// this.subscription = this.cartService.getAllInCartProducts()
-		this.subscription = this.cartService.getCart().subscribe( data => {
+		// this.subscription = this.cartService.getCart().subscribe( data => {
+		// 	console.log(data);
+		// 	// this.mTotal = data.length;
+		// 	// this.inCartProducts = data;
+		// });
+		this.subscription = this.cartService.getAllProductsHaoTestObservible().subscribe( data => {
 			console.log(data);
-			// this.mTotal = data.length;
-			// this.inCartProducts = data;
+			this.mTotal = data.length;
+			this.inCartProducts = data;
 		});
 
 		// this.inCartProducts = this.cartService.getAllInCartProducts();

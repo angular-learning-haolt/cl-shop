@@ -33,6 +33,7 @@ export class ProductListComponent implements OnInit {
 
 	onAddToCart(product) {
 		// this.cartService.addProductToCart(product);
-		this.cartService.addCard();
+		// this.cartService.addCard();
+		this.cartService.addProductsHaoTestObservible(product);
 	}
 }

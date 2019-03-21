@@ -4,9 +4,12 @@
         [routerLink]="['cart']"
     >
         CART
-        <span class="badge badge-warning">4</span>
+        <span class="badge badge-warning">{{mTotal}}</span>
     </a>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        No products :))
-    </div>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li *ngFor="let inCartProduct of inCartProducts" class="m-3">
+            <img src="{{ inCartProduct.imgUrl }}" style="width: 30px; height: 30px">
+            {{ inCartProduct.name }}
+        </li>
+    </ul>
 </li>
