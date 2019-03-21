@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from './../cart.service';
-import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-cart-quantity',
@@ -30,16 +29,16 @@ export class CartQuantityComponent implements OnInit, OnDestroy {
 		// 		this.inCartProducts = res;
 		// 	})
 		// this.subscription = this.cartService.getAllInCartProducts()
-		// this.subscription = this.cartService.getAllInCartProducts().subscribe( data => {
-		// 	console.log(data);
-		// 	// this.mTotal = data.length;
-		// 	// this.inCartProducts = data;
-		// }
-		// );
-		this.inCartProducts = this.cartService.getAllInCartProducts();
+		this.subscription = this.cartService.getCart().subscribe( data => {
+			console.log(data);
+			// this.mTotal = data.length;
+			// this.inCartProducts = data;
+		});
+
+		// this.inCartProducts = this.cartService.getAllInCartProducts();
 	}
 
 	ngOnDestroy(){
-		// this.subscription.unsubscribe();
+		this.subscription.unsubscribe();
 	}
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from './../products/product.class';
-import {Observable, of, from} from 'rxjs';
+import {Observable, of, from, BehaviorSubject} from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -8,8 +8,19 @@ import {Observable, of, from} from 'rxjs';
 export class CartService {
 
 	public inCartProducts : any[] = [];
+	public cardSbj : BehaviorSubject<any[] | null >;
 
-	constructor() { }
+	constructor() {
+		this.cardSbj = new BehaviorSubject(null);
+	}
+
+	addCard() {
+		this.cardSbj.next(['So difficult :(( ']);
+	}
+
+	getCart() {
+		return this.cardSbj;
+	}
 
 	saveToLocalStorage() {
 		localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
