@@ -11,5 +11,6 @@
             <img src="{{ inCartProduct.imgUrl }}" style="width: 30px; height: 30px">
             {{ inCartProduct.name }}
         </li>
+        <small class="p-3" *ngIf="inCartProducts.length === 0">You have no products</small>
     </ul>
 </li>
