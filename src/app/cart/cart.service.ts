@@ -8,12 +8,12 @@ import {Observable, BehaviorSubject} from 'rxjs';
 export class CartService {
 
 	public inCartProducts : any[] = [];
-	public productsHaoTestObservible : BehaviorSubject<any[] | [] >;
-	public cardSbj : BehaviorSubject<any[] | null >;
+	public productsUseObservible : BehaviorSubject<any[] | [] >;
+	public cardSbj : BehaviorSubject<any[] | null >; // Example of Mr.Dan
 
 	constructor() {
 		this.cardSbj = new BehaviorSubject(null);
-		this.productsHaoTestObservible = new BehaviorSubject([]);
+		this.productsUseObservible = new BehaviorSubject([]);
 	}
 
 	addCard() {
@@ -22,6 +22,48 @@ export class CartService {
 
 	getCart() {
 		return this.cardSbj;
+	}
+
+	addProductsUseObservible(product) {
+		if (localStorage.getItem('inCartProducts') === null) {
+			localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
+		}
+		else {
+			this.inCartProducts = JSON.parse(localStorage.getItem('inCartProducts'));
+		}
+
+		if (product) {
+
+			if (this.inCartProducts.length === 0) {
+				let inCartProduct = {...product};
+				inCartProduct.quantity = 1;
+				this.inCartProducts.push(inCartProduct);
+				localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
+			}
+			else {
+				let index = this.inCartProducts.findIndex((item)=> item.id === product.id);
+				if (index === -1) {
+					let inCartProduct = {...product};
+					inCartProduct.quantity = 1;
+					this.inCartProducts.push(inCartProduct);
+					localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
+				}
+				else {
+					this.inCartProducts[index].quantity += 1;
+					localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
+				}
+			}
+		}
+		this.productsUseObservible.next(this.inCartProducts);
+	}
+	getAllProductsUseObservible() {
+		if (localStorage.getItem('inCartProducts') === null) {
+			localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
+		}
+		else {
+			this.inCartProducts = JSON.parse(localStorage.getItem('inCartProducts'));
+		}
+	    return this.productsUseObservible;
 	}
 
 	saveToLocalStorage() {
@@ -60,48 +102,6 @@ export class CartService {
 		}
 	}
 
-
-	addProductsHaoTestObservible(product) {
-		if (localStorage.getItem('inCartProducts') === null) {
-			localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
-		}
-		else {
-			this.inCartProducts = JSON.parse(localStorage.getItem('inCartProducts'));
-		}
-
-		if (product) {
-
-			if (this.inCartProducts.length === 0) {
-				let inCartProduct = {...product};
-				inCartProduct.quantity = 1;
-				this.inCartProducts.push(inCartProduct);
-				localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
-			}
-			else {
-				let index = this.inCartProducts.findIndex((item)=> item.id === product.id);
-				if (index === -1) {
-					let inCartProduct = {...product};
-					inCartProduct.quantity = 1;
-					this.inCartProducts.push(inCartProduct);
-					localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
-				}
-				else {
-					this.inCartProducts[index].quantity += 1;
-					localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
-				}
-			}
-		}
-		this.productsHaoTestObservible.next(this.inCartProducts);
-	}
-	getAllProductsHaoTestObservible() {
-		if (localStorage.getItem('inCartProducts') === null) {
-			localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));
-		}
-		else {
-			this.inCartProducts = JSON.parse(localStorage.getItem('inCartProducts'));
-		}
-	    return this.productsHaoTestObservible;
-	}
 	getAllInCartProducts() {
 		if (localStorage.getItem('inCartProducts') === null) {
 			localStorage.setItem('inCartProducts', JSON.stringify(this.inCartProducts));

@@ -11,8 +11,8 @@ export class CartQuantityComponent implements OnInit, OnDestroy {
 
 
 	public subscription : Subscription;
-	mTotal:number = 0;
-	inCartProducts:Array<any>=[];
+	public quantity : number = 0;
+	public inCartProducts:Array<any>=[];
 
 	constructor(
 		public cartService : CartService
@@ -23,24 +23,11 @@ export class CartQuantityComponent implements OnInit, OnDestroy {
 	}
 
 	getAllProductsInCart() {
-		// this.subscription = this.cartService.getAllInCartProducts().subscribe((res)=>{
-		// 	console.log(res);
-		// 		this.mTotal = res.length;
-		// 		this.inCartProducts = res;
-		// 	})
-		// this.subscription = this.cartService.getAllInCartProducts()
-		// this.subscription = this.cartService.getCart().subscribe( data => {
-		// 	console.log(data);
-		// 	// this.mTotal = data.length;
-		// 	// this.inCartProducts = data;
-		// });
-		this.subscription = this.cartService.getAllProductsHaoTestObservible().subscribe( data => {
+		this.subscription = this.cartService.getAllProductsUseObservible().subscribe( data => {
 			console.log(data);
-			this.mTotal = data.length;
+			this.quantity = data.length;
 			this.inCartProducts = data;
 		});
-
-		// this.inCartProducts = this.cartService.getAllInCartProducts();
 	}
 
 	ngOnDestroy(){

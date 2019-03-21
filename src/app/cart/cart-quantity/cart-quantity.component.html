@@ -4,7 +4,7 @@
         [routerLink]="['cart']"
     >
         CART
-        <span class="badge badge-warning">{{mTotal}}</span>
+        <span class="badge badge-warning">{{ quantity }}</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <li *ngFor="let inCartProduct of inCartProducts" class="m-3">

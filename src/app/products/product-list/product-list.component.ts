@@ -27,13 +27,11 @@ export class ProductListComponent implements OnInit {
 	}
 
 	onSearch() {
-		// console.log(this.name, this.category, this.price);
 		this.products = this.productService.getAllProducts(this.products, this.name, this.category, this.price);
 	}
 
 	onAddToCart(product) {
-		// this.cartService.addProductToCart(product);
 		// this.cartService.addCard();
-		this.cartService.addProductsHaoTestObservible(product);
+		this.cartService.addProductsUseObservible(product);
 	}
 }
